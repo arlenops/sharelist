@@ -12,7 +12,17 @@
           </template>
         </n-switch>
       </div>
-      <div class="light-green" v-html="notice"></div>
+      <div class="light-green">
+        <div class="notice-content">
+          <img :src="noticeImage" alt="ChatGPT 官方镜像" class="notice-image" />
+          <div class="notice-text">
+            <p class="notice-title">ChatGPT 官方镜像</p>
+            <p class="notice-detail">
+              禁止涉及黄、赌、毒、政及任何不良行为，否则将会永久封号。
+            </p>
+          </div>
+        </div>
+      </div>
     </n-gi>
   </n-grid>
   <n-grid x-gap="10" y-gap="10" cols="2 s:3 m:4 l:5 xl:5 2xl:6" responsive="screen">
@@ -70,6 +80,7 @@ const isDev = import.meta.env.MODE === 'development'
 import axios from 'axios';
 import { DarkModeTwotone, DarkModeOutlined } from '@vicons/material'
 import { useLoadingBar } from 'naive-ui'
+import gptGif from '../assets/gpt.gif'
 export default {
   props: {
     isDarkTheme: {
@@ -85,7 +96,7 @@ export default {
     return {
       itemslist: [],
       itemsplus: [],
-      notice: "",
+      noticeImage: gptGif,
       total: 0,
       page: 1,
       isLoading: false,
@@ -165,7 +176,6 @@ export default {
             this.hasMoreData = false;
             return;
           }
-          this.notice = response.data.notice;
           this.total = response.data?.data?.pagination?.total ?? 0;
 
           this.page += 1;
@@ -277,6 +287,37 @@ export default {
   padding: 0 20px 20px 20px;
   border-radius: 10px;
   background: none;
+}
+
+.notice-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 10px;
+  padding: 16px;
+  background: rgba(103, 194, 58, 0.12);
+}
+
+.notice-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.notice-text {
+  color: #2c3e50;
+}
+
+.notice-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.notice-detail {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .cardclss {
