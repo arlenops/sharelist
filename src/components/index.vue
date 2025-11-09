@@ -1,17 +1,7 @@
 <template>
   <n-global-style />
-  <n-grid class="notice" x-gap="12" :cols="1" :style="theme()">
+  <n-grid class="notice" x-gap="12" :cols="1">
     <n-gi>
-      <div style="display: flex;flex-direction: row-reverse;margin: 10px 10px 0 0;">
-        <n-switch :default-value="isDarkTheme" @update:value="(v) => $emit('changeIsDarkTheme', v)" >
-          <template #checked-icon>
-            <DarkModeOutlined />
-          </template>
-          <template #unchecked-icon>
-            <DarkModeTwotone />
-          </template>
-        </n-switch>
-      </div>
       <div class="light-green">
         <div class="notice-content">
           <img :src="noticeImage" alt="ChatGPT 官方镜像" class="notice-image" />
@@ -26,7 +16,7 @@
     </n-gi>
   </n-grid>
   <n-grid x-gap="10" y-gap="10" cols="2 s:3 m:4 l:5 xl:5 2xl:6" responsive="screen">
-    <n-grid-item class="cardclss" v-for="item in itemslist" :key="item.carID" :style="theme()">
+    <n-grid-item class="cardclss" v-for="item in itemslist" :key="item.carID">
       <n-card size="small" bordered="false" content-style="box-class" content-class="box-class"
               @click="redirectTo(item.carID)">
         <div style="display: flex;align-items: center;justify-content: space-between;">
@@ -78,25 +68,14 @@ function uniqueArrayObjects(arr) {
 const isDev = import.meta.env.MODE === 'development'
 
 import axios from 'axios';
-import { DarkModeTwotone, DarkModeOutlined } from '@vicons/material'
 import { useLoadingBar } from 'naive-ui'
-import gptGif from '../assets/gpt.gif'
+import gptImage from '../assets/gpt.png'
 export default {
-  props: {
-    isDarkTheme: {
-      type: Boolean,
-      default: false
-    }
-  },
-  components: {
-    DarkModeTwotone,
-    DarkModeOutlined
-  },
   data() {
     return {
       itemslist: [],
       itemsplus: [],
-      noticeImage: gptGif,
+      noticeImage: gptImage,
       total: 0,
       page: 1,
       isLoading: false,
@@ -151,9 +130,6 @@ export default {
       } catch (e) {
         console.error('请求错误:', e);
       }
-    },
-    theme() {
-      return this.isDarkTheme ? { 'background-color': '#252529' } : { 'background-color': '#eff4f9' }
     },
     customColor(c) {
       return c === 'yellow' ? '#ffc70b' : c;
@@ -215,7 +191,7 @@ export default {
 
 <style>
 #app {
-  padding: 10px;
+  padding: 0 10px 10px 10px;
 }
 
 .n-button {
@@ -291,32 +267,35 @@ export default {
 
 .notice-content {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  text-align: center;
+  gap: 16px;
   border-radius: 10px;
-  padding: 16px;
-  background: rgba(103, 194, 58, 0.12);
+  padding: 16px 0;
 }
 
 .notice-image {
-  width: 80px;
-  height: 80px;
+  width: 80vw;
+  max-width: 960px;
+  height: auto;
   object-fit: contain;
 }
 
 .notice-text {
   color: #2c3e50;
+  max-width: 460px;
 }
 
 .notice-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .notice-detail {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.8;
   margin: 0;
 }
 
