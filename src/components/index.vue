@@ -273,12 +273,14 @@ export default {
   gap: 16px;
   border-radius: 10px;
   padding: 16px 0;
+  width: 100%;
 }
 
 .notice-image {
-  width: 80vw;
-  max-width: 960px;
+  width: 100%;
+  max-width: none;
   height: auto;
+  display: block;
   object-fit: contain;
 }
 
@@ -300,6 +302,7 @@ export default {
 }
 
 .cardclss {
+  border: 1px solid #000;
   border-radius: 10px !important;
 }
 

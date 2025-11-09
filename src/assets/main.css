@@ -18,10 +18,12 @@
 }
 .cardclss{
     text-align: center;
+    border: 1px solid #000;
+    border-radius: 10px;
 }
 .cardclss:hover{
     background: rgba(0, 128, 0, 0.12);
-    border-radius: 10px;
+    border-color: #000;
 }
 .total{
     margin-top: 25px;
